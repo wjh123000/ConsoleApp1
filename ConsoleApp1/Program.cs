@@ -1,37 +1,63 @@
 
 namespace ConsoleApp
 {
-    class Program
+
+    class Student
     {
-        // ref 引用参数允许在方法中修改传入的参数值，并且这些修改会反映到调用方法的地方。
-        // out 参数用于在方法中返回多个值，调用方法时不需要初始化 out 参数，但必须在方法中为其赋值。
-        // in 只读参数，允许在方法中读取传入的参数值，但不能修改它们。
-        static bool MyMethod(ref int number, out float result)
+        public const double PI = 3.14159;
+
+        public Student(string name)
         {
-            number = 100;
-            result = 3.14f;
-            return true;
+            //Age = age;
+            Name = name;
         }
 
-        static int GetSum(params int[] numbers)
+
+        private int age;
+        //自动生成的属性
+        //init 关键字用于初始化属性的值，只能在对象初始化时设置，之后不能修改。
+        public string Name { get; init; }
+
+        public int Age
         {
-            int sum = 0;
-            foreach (int number in numbers)
+            get
             {
-                sum += number;
+                return age;
             }
-            return sum;
+            set
+            {
+                if(value > 150)
+                {
+                    throw new ArgumentException();
+                }
+                age=value;
+            }
         }
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"Name: {Name}, Age: {Age}");
+        }
+
+    }
+    class Program
+    {
 
         static void Main(string[] args)
         {
-            int number = 0;
-            float result;
-            MyMethod(ref number, out result);
+            Student stu1 = new Student("Alice");
+            // stu1.Age = 20;
+            // stu1.Name = "Alice";
 
-            Console.WriteLine($"Number: {number}, Result: {result}");
+            Student Tom = new Student("Tom")
+            {
+                Age = 25,
+                Name = "tom"
+            };
 
-            Console.WriteLine($"Sum: {GetSum( 1, 2, 3, 4, 5)}");
+
+            stu1.DisplayInfo();
+
         }
     }
 }
