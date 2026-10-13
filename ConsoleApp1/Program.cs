@@ -1,6 +1,7 @@
 
 namespace ConsoleApp
 {
+    /*
 
     class Student
     {
@@ -58,6 +59,32 @@ namespace ConsoleApp
 
             stu1.DisplayInfo();
 
+        }
+    }
+    */
+
+    public delegate int MyDelegate(int x, int y);
+
+    class Calculator
+    {
+        public static int Add(int x, int y)
+        {
+            return x + y;
+        }
+        public int Subtract(int x, int y)
+        {
+            return x - y;
+        }
+    }
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            MyDelegate del = Calculator.Add;
+            Calculator calc = new Calculator();
+
+            del += calc.Subtract;
         }
     }
 }
